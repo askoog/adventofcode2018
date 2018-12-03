@@ -21,6 +21,28 @@ public class Dec02 {
 		}).count();
 		
 		System.out.println(duplicates + " * " + triplets + " = " + (duplicates * triplets));
+	
+	
+		lines.stream().filter(line -> findOffByOne(line, lines)).findFirst();
+	}
+
+	private static boolean findOffByOne(String line, List<String> lines) {
+		for (String string : lines) {
+			int diff = 0;
+			StringBuilder common = new StringBuilder(); 
+			for (int i = 0; i < string.length(); i++) {
+				if (string.charAt(i) != line.charAt(i)) {
+					diff++;
+				} else {
+					common.append(string.charAt(i));
+				}
+			}
+			if (diff == 1) {
+				System.out.println(line + " " + string + " common=" + common);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private static Map<Character, Integer> toMapOfOccurance(String line) {
